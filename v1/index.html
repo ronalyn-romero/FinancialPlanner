@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #000000;
+            --primary-accent: #341539;
+            --secondary-accent: #8e4585;
+            --text-color: #ffffff;
+            --card-bg: rgba(52, 21, 57, 0.25);
+            --card-border: rgba(142, 69, 133, 0.3);
+            --glass-blur: blur(16px);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            padding: 2.5rem;
+            padding-bottom: 8rem; /* space for command bar */
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(52, 21, 57, 0.4), transparent 40%),
+                radial-gradient(circle at 85% 30%, rgba(142, 69, 133, 0.15), transparent 40%);
+            background-attachment: fixed;
+            overflow-x: hidden;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3.5rem;
+            max-width: 1200px;
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        h1 {
+            font-weight: 600;
+            font-size: 2.2rem;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #ffffff, #e0b0ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .reset-btn {
+            background: rgba(52, 21, 57, 0.4);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--card-border);
+            color: var(--secondary-accent);
+            padding: 0.6rem 1.2rem;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .reset-btn:hover {
+            background: var(--primary-accent);
+            color: #ffffff;
+            border-color: var(--secondary-accent);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(142, 69, 133, 0.3);
+        }
+        
+        .reset-btn:active {
+            transform: translateY(0);
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--card-border);
+            border-radius: 24px;
+            padding: 2.2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease, border-color 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(145deg, rgba(255,255,255,0.05) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 20px rgba(52, 21, 57, 0.4);
+            border-color: rgba(142, 69, 133, 0.6);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .card-title {
+            font-size: 1.15rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.8);
+            letter-spacing: 0.5px;
+        }
+
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            background: rgba(142, 69, 133, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--secondary-accent);
+            border: 1px solid rgba(142, 69, 133, 0.2);
+        }
+
+        .card-value {
+            font-size: 3.5rem;
+            font-weight: 600;
+            color: var(--text-color);
+            display: flex;
+            align-items: baseline;
+            gap: 0.3rem;
+            letter-spacing: -1px;
+        }
+
+        .currency-symbol {
+            font-size: 1.8rem;
+            color: var(--secondary-accent);
+            font-weight: 500;
+            transform: translateY(-4px);
+        }
+
+        .command-bar-container {
+            position: fixed;
+            bottom: 2.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 700px;
+            z-index: 100;
+        }
+
+        .command-input-wrapper {
+            position: relative;
+            width: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        .command-icon {
+            position: absolute;
+            left: 1.8rem;
+            color: var(--secondary-accent);
+            font-size: 1.2rem;
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .command-input {
+            width: 100%;
+            padding: 1.2rem 2rem 1.2rem 4.5rem;
+            background: rgba(15, 5, 17, 0.85);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border: 1px solid rgba(142, 69, 133, 0.4);
+            border-radius: 99px;
+            color: #ffffff;
+            font-size: 1.15rem;
+            font-weight: 400;
+            outline: none;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(142, 69, 133, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .command-input::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+            font-weight: 300;
+        }
+
+        .command-input:focus {
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.6), 0 0 30px rgba(142, 69, 133, 0.4), inset 0 0 10px rgba(52, 21, 57, 0.3);
+            border-color: var(--secondary-accent);
+            background: rgba(20, 8, 23, 0.95);
+        }
+        
+        .toast {
+            position: fixed;
+            top: 2rem;
+            left: 50%;
+            transform: translateX(-50%) translateY(-20px);
+            background: var(--primary-accent);
+            color: white;
+            padding: 0.9rem 1.8rem;
+            border-radius: 99px;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+            z-index: 1000;
+            border: 1px solid var(--card-border);
+            font-weight: 500;
+            letter-spacing: 0.3px;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .toast-icon {
+            color: var(--secondary-accent);
+            display: flex;
+        }
+
+        /* Subtle pulse animation for the command icon */
+        @keyframes subtlePulse {
+            0% { opacity: 0.7; transform: scale(0.95); }
+            50% { opacity: 1; transform: scale(1.05); }
+            100% { opacity: 0.7; transform: scale(0.95); }
+        }
+
+        .command-icon svg {
+            animation: subtlePulse 3s infinite ease-in-out;
+        }
+        
+        @media (max-width: 768px) {
+            body { padding: 1.5rem; padding-bottom: 7rem; }
+            h1 { font-size: 1.8rem; }
+            .card { padding: 1.8rem; }
+            .card-value { font-size: 2.8rem; }
+            .command-bar-container { width: 95%; bottom: 1.5rem; }
+            .command-input { font-size: 1rem; padding: 1rem 1.5rem 1rem 3.5rem; }
+            .command-icon { left: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Financial Dashboard</h1>
+        <button class="reset-btn" id="resetBtn" aria-label="Reset Dashboard">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+                <path d="M3 3v5h5"></path>
+            </svg>
+            Reset
+        </button>
+    </header>
+
+    <main class="dashboard-grid">
+        <div class="card">
+            <div class="card-header">
+                <span class="card-title">Total Income</span>
+                <div class="card-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="card-value">
+                <span class="currency-symbol">$</span>
+                <span id="incomeValue" class="amount">0</span>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <span class="card-title">Total Expenses</span>
+                <div class="card-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M8 12h8"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="card-value">
+                <span class="currency-symbol">$</span>
+                <span id="expensesValue" class="amount">0</span>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <span class="card-title">Savings Goal</span>
+                <div class="card-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/>
+                        <circle cx="12" cy="7" r="4"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="card-value">
+                <span class="currency-symbol">$</span>
+                <span id="savingsValue" class="amount">0</span>
+            </div>
+        </div>
+    </main>
+
+    <div class="command-bar-container">
+        <div class="command-input-wrapper">
+            <div class="command-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 10 4 15 9 20"></polyline>
+                    <path d="M20 4v7a4 4 0 0 1-4 4H4"></path>
+                </svg>
+            </div>
+            <input type="text" id="commandInput" class="command-input" placeholder="e.g. 'income 5000', 'spent 120 on coffee', 'save 300'" autocomplete="off">
+        </div>
+    </div>
+    
+    <div id="toast" class="toast">
+        <span class="toast-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+            </svg>
+        </span>
+        <span id="toastMessage">Command processed</span>
+    </div>
+
+    <script>
+        // DOM Elements
+        const incomeEl = document.getElementById('incomeValue');
+        const expensesEl = document.getElementById('expensesValue');
+        const savingsEl = document.getElementById('savingsValue');
+        const commandInput = document.getElementById('commandInput');
+        const resetBtn = document.getElementById('resetBtn');
+        const toast = document.getElementById('toast');
+        const toastMessage = document.getElementById('toastMessage');
+
+        // State
+        let state = {
+            income: 0,
+            expenses: 0,
+            savings: 0
+        };
+
+        // Initialize from localStorage
+        function loadState() {
+            const savedState = localStorage.getItem('financial_dashboard_state');
+            if (savedState) {
+                try {
+                    state = JSON.parse(savedState);
+                } catch (e) {
+                    console.error('Error parsing state from localStorage', e);
+                }
+            }
+            updateUI(false);
+        }
+
+        // Save to localStorage
+        function saveState() {
+            localStorage.setItem('financial_dashboard_state', JSON.stringify(state));
+        }
+
+        // Format number with commas
+        function formatNumber(num) {
+            return num.toLocaleString('en-US', {
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 2
+            });
+        }
+        
+        // Count up animation
+        function animateValue(obj, start, end, duration) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                // easeOutQuart
+                const ease = 1 - Math.pow(1 - progress, 4);
+                const current = start + (end - start) * ease;
+                obj.innerText = formatNumber(current);
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                } else {
+                    obj.innerText = formatNumber(end);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        // Update UI with current state values
+        function updateUI(animate = true) {
+            // Get current displayed values
+            const currentIncome = parseFloat(incomeEl.innerText.replace(/,/g, '')) || 0;
+            const currentExpenses = parseFloat(expensesEl.innerText.replace(/,/g, '')) || 0;
+            const currentSavings = parseFloat(savingsEl.innerText.replace(/,/g, '')) || 0;
+            
+            if (animate) {
+                if (currentIncome !== state.income) animateValue(incomeEl, currentIncome, state.income, 800);
+                if (currentExpenses !== state.expenses) animateValue(expensesEl, currentExpenses, state.expenses, 800);
+                if (currentSavings !== state.savings) animateValue(savingsEl, currentSavings, state.savings, 800);
+            } else {
+                incomeEl.innerText = formatNumber(state.income);
+                expensesEl.innerText = formatNumber(state.expenses);
+                savingsEl.innerText = formatNumber(state.savings);
+            }
+        }
+
+        let toastTimeout;
+        // Show toast notification
+        function showToast(message, isError = false) {
+            clearTimeout(toastTimeout);
+            toastMessage.innerText = message;
+            
+            const icon = toast.querySelector('.toast-icon');
+            if (isError) {
+                icon.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>';
+                icon.style.color = '#ff6b6b';
+            } else {
+                icon.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>';
+                icon.style.color = 'var(--secondary-accent)';
+            }
+            
+            toast.classList.add('show');
+            toastTimeout = setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Parse command text
+        function parseCommand(text) {
+            const originalText = text;
+            text = text.toLowerCase().trim();
+            if (!text) return;
+
+            // Extract number using regex: optional negative sign, digits, optional decimal and digits
+            const numberMatch = text.match(/-?\d+(\.\d+)?/);
+            if (!numberMatch) {
+                showToast("No amount detected in command.", true);
+                
+                // Add a shake animation to input using vanilla JS/CSS
+                commandInput.style.transform = "translateX(5px)";
+                setTimeout(() => commandInput.style.transform = "translateX(-5px)", 100);
+                setTimeout(() => commandInput.style.transform = "translateX(5px)", 200);
+                setTimeout(() => commandInput.style.transform = "translateX(0)", 300);
+                return;
+            }
+
+            const amount = parseFloat(numberMatch[0]);
+            if (isNaN(amount)) return;
+
+            let updated = false;
+
+            if (text.includes('income')) {
+                state.income += amount;
+                updated = true;
+                showToast(`Added $${formatNumber(amount)} to Income`);
+            } else if (text.includes('spent') || text.includes('expense')) {
+                state.expenses += amount;
+                updated = true;
+                showToast(`Added $${formatNumber(amount)} to Expenses`);
+            } else if (text.includes('save') || text.includes('saving')) {
+                state.savings += amount;
+                updated = true;
+                showToast(`Added $${formatNumber(amount)} to Savings Goal`);
+            }
+
+            if (updated) {
+                saveState();
+                updateUI(true); // Animate values
+                
+                // Clear input with a small delay for better UX
+                commandInput.disabled = true;
+                setTimeout(() => {
+                    commandInput.value = '';
+                    commandInput.disabled = false;
+                    commandInput.focus();
+                }, 150);
+            } else {
+                showToast("Use keywords: 'income', 'spent', or 'save'", true);
+            }
+        }
+
+        // Event Listeners
+        commandInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                parseCommand(commandInput.value);
+            }
+        });
+
+        resetBtn.addEventListener('click', () => {
+            if (confirm('Are you sure you want to reset all data to zero?')) {
+                state = { income: 0, expenses: 0, savings: 0 };
+                saveState();
+                updateUI(true); // Animate down to zero
+                commandInput.value = '';
+                showToast("All data has been reset.");
+            }
+        });
+
+        // Initialize
+        loadState();
+        
+        // Focus input on load for quick entry
+        window.onload = () => {
+            setTimeout(() => commandInput.focus(), 300);
+        };
+    </script>
+</body>
+</html>
