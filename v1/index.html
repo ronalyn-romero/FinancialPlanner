@@ -957,6 +957,10 @@
             pointer-events: auto;
             cursor: pointer;
         }
+
+        .nav-item svg, .drawer-close svg, .fab-button svg, .reset-btn svg {
+            pointer-events: none;
+        }
     </style>
 </head>
 <body>
@@ -1767,8 +1771,8 @@
         // Initialize
         loadState();
 
-        // Hard Reset DOMContentLoaded Listeners explicitly as requested
-        document.addEventListener('DOMContentLoaded', () => {
+        // Hard Reset Listeners explicitly as requested
+        function initializeUIButtons() {
             const btnDashboard = document.getElementById('btn-dashboard');
             const btnTransactions = document.getElementById('btn-transactions');
             const btnGoals = document.getElementById('btn-goals');
@@ -1776,8 +1780,9 @@
             const closeBtn = document.getElementById('closeDrawerBtn');
             const viewDash = document.getElementById('viewDashboard');
             const viewTab = document.getElementById('viewTable');
+            const pageTitleEl = document.getElementById('pageTitle');
 
-            if (btnGoals) {
+            if (btnGoals && sideGoalDrawer) {
                 btnGoals.onclick = () => {
                     sideGoalDrawer.style.right = '0';
                     document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
@@ -1785,32 +1790,38 @@
                 };
             }
 
-            if (closeBtn) {
+            if (closeBtn && sideGoalDrawer) {
                 closeBtn.onclick = () => {
                     sideGoalDrawer.style.right = '-400px';
                 };
             }
 
-            if (btnTransactions) {
+            if (btnTransactions && viewDash && viewTab) {
                 btnTransactions.onclick = () => {
                     viewDash.style.display = 'none';
                     viewTab.style.display = 'block';
                     document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
                     btnTransactions.classList.add('active');
-                    document.getElementById('pageTitle').innerText = "All Transactions";
+                    if(pageTitleEl) pageTitleEl.innerText = "All Transactions";
                 };
             }
 
-            if (btnDashboard) {
+            if (btnDashboard && viewDash && viewTab) {
                 btnDashboard.onclick = () => {
                     viewDash.style.display = 'block';
                     viewTab.style.display = 'block';
                     document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
                     btnDashboard.classList.add('active');
-                    document.getElementById('pageTitle').innerText = "Overview";
+                    if(pageTitleEl) pageTitleEl.innerText = "Overview";
                 };
             }
-        });
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializeUIButtons);
+        } else {
+            initializeUIButtons();
+        }
     </script>
     <div class="confirm-modal-overlay" id="confirmModal">
         <div class="confirm-modal-content">
