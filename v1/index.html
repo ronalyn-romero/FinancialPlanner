@@ -1111,20 +1111,7 @@
 
         <button class="drawer-save-btn clickable" id="showAddGoalBtn" style="margin-top: auto; background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.1); color: var(--text-main);">+ Add New Goal</button>
 
-        <div class="add-goal-form" id="addGoalForm" style="display: none; margin-top: auto;">
-            <div class="goal-input-group">
-                <label class="goal-label">Goal Name</label>
-                <input type="text" id="newGoalName" class="goal-input" placeholder="e.g. New Car">
-            </div>
-            <div class="goal-input-group">
-                <label class="goal-label">Target Amount ($)</label>
-                <input type="number" id="newGoalTarget" class="goal-input" placeholder="10000">
-            </div>
-            <div style="display: flex; gap: 0.5rem; margin-top: 0.5rem;">
-                <button class="drawer-save-btn clickable cancel-btn" id="cancelAddGoalBtn" style="margin-top: 0;">Cancel</button>
-                <button class="drawer-save-btn clickable" id="saveNewGoalBtn" style="flex: 1; margin-top: 0;">Save Goal</button>
-            </div>
-        </div>
+        <button class="drawer-save-btn clickable" id="showAddGoalBtn" style="margin-top: auto; background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.1); color: var(--text-main);">+ Add New Goal</button>
     </div>
 
     <div class="fab-container">
@@ -1663,8 +1650,9 @@
                             <div class="progress-bar-bg">
                                 <div class="progress-bar-fill" style="width: ${percent}%"></div>
                             </div>
-                            <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem; text-align: right;">
-                                $${formatNumber(saved)} / $${formatNumber(goal.target)}
+                            <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem; display: flex; justify-content: space-between;">
+                                <span>${goal.date ? 'Target: ' + goal.date : ''}</span>
+                                <span>$${formatNumber(saved)} / $${formatNumber(goal.target)}</span>
                             </div>
                         </div>
                     </div>
@@ -1700,16 +1688,7 @@
 
         // Event Listeners for UI elements
         document.addEventListener('click', (e) => {
-            // Close logic handled above
             closeOutsideClick(e);
-
-            // Floating Buttons
-            if (e.target.closest('#fabAI')) {
-                toggleAiBubble();
-            }
-            if (e.target.closest('#fabManual')) {
-                toggleManualBubble();
-            }
         });
 
         commandInput.addEventListener('keypress', (e) => {
@@ -1726,34 +1705,6 @@
         
         manualDesc.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') submitManualEntry();
-        });
-
-        showAddGoalBtn.addEventListener('click', () => {
-            showAddGoalBtn.style.display = 'none';
-            addGoalForm.style.display = 'flex';
-            newGoalName.focus();
-        });
-
-        cancelAddGoalBtn.addEventListener('click', () => {
-            addGoalForm.style.display = 'none';
-            showAddGoalBtn.style.display = 'block';
-            newGoalName.value = '';
-            newGoalTarget.value = '';
-        });
-
-        saveNewGoalBtn.addEventListener('click', () => {
-            const name = newGoalName.value.trim() || 'New Goal';
-            const target = parseFloat(newGoalTarget.value) || 1000;
-            
-            state.goals.push({ id: Date.now(), name: name, target: target });
-            saveState();
-            updateGoalDrawerUI();
-            showToast("Goal created!");
-            
-            addGoalForm.style.display = 'none';
-            showAddGoalBtn.style.display = 'block';
-            newGoalName.value = '';
-            newGoalTarget.value = '';
         });
 
         resetBtn.addEventListener('click', () => {
@@ -1781,6 +1732,68 @@
             const viewDash = document.getElementById('viewDashboard');
             const viewTab = document.getElementById('viewTable');
             const pageTitleEl = document.getElementById('pageTitle');
+            
+            const fabAIManual = document.getElementById('fabAI');
+            const fabManualBtn = document.getElementById('fabManual');
+            
+            const btnShowAddGoal = document.getElementById('showAddGoalBtn');
+            const btnCancelAddGoal = document.getElementById('cancelAddGoalBtn');
+            const btnSaveNewGoal = document.getElementById('saveNewGoalBtn');
+            const addGoalModal = document.getElementById('addGoalModal');
+            const inputGoalName = document.getElementById('newGoalName');
+            const inputGoalTarget = document.getElementById('newGoalTarget');
+            const inputGoalDate = document.getElementById('newGoalDate');
+
+            if (fabAIManual) {
+                fabAIManual.onclick = (e) => {
+                    e.stopPropagation();
+                    toggleAiBubble();
+                };
+            }
+
+            if (fabManualBtn) {
+                fabManualBtn.onclick = (e) => {
+                    e.stopPropagation();
+                    toggleManualBubble();
+                };
+            }
+
+            if (btnShowAddGoal && addGoalModal) {
+                btnShowAddGoal.onclick = () => {
+                    addGoalModal.classList.add('active');
+                    if(inputGoalName) inputGoalName.focus();
+                };
+            }
+
+            if (btnCancelAddGoal && addGoalModal) {
+                btnCancelAddGoal.onclick = () => {
+                    addGoalModal.classList.remove('active');
+                    if(inputGoalName) inputGoalName.value = '';
+                    if(inputGoalTarget) inputGoalTarget.value = '';
+                    if(inputGoalDate) inputGoalDate.value = '';
+                };
+            }
+
+            if (btnSaveNewGoal && addGoalModal) {
+                btnSaveNewGoal.onclick = () => {
+                    const name = inputGoalName ? inputGoalName.value.trim() : '';
+                    const target = inputGoalTarget ? parseFloat(inputGoalTarget.value) : 0;
+                    const targetDate = inputGoalDate ? inputGoalDate.value : '';
+                    
+                    const finalName = name || 'New Goal';
+                    const finalTarget = isNaN(target) || target <= 0 ? 1000 : target;
+
+                    state.goals.push({ id: Date.now(), name: finalName, target: finalTarget, date: targetDate });
+                    saveState();
+                    updateGoalDrawerUI();
+                    showToast("Goal created!");
+                    
+                    addGoalModal.classList.remove('active');
+                    if(inputGoalName) inputGoalName.value = '';
+                    if(inputGoalTarget) inputGoalTarget.value = '';
+                    if(inputGoalDate) inputGoalDate.value = '';
+                };
+            }
 
             if (btnGoals && sideGoalDrawer) {
                 btnGoals.onclick = () => {
@@ -1830,6 +1843,33 @@
             <div class="confirm-actions">
                 <button class="confirm-btn cancel-btn clickable" id="confirmCancelBtn">Cancel</button>
                 <button class="confirm-btn delete-btn clickable" id="confirmDeleteBtn">Delete</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Add Goal Modal -->
+    <div class="confirm-modal-overlay" id="addGoalModal">
+        <div class="confirm-modal-content" style="text-align: left;">
+            <div class="drawer-header" style="margin-bottom: 2rem; justify-content: center;">
+                <span class="drawer-title" style="font-size: 1.4rem;">Add New Goal</span>
+            </div>
+            <div class="add-goal-form" style="display: flex; background: transparent; padding: 0; border: none; margin-top: 0; box-shadow: none; animation: none;">
+                <div class="goal-input-group">
+                    <label class="goal-label">Goal Name</label>
+                    <input type="text" id="newGoalName" class="goal-input" placeholder="e.g. New Car">
+                </div>
+                <div class="goal-input-group">
+                    <label class="goal-label">Target Amount ($)</label>
+                    <input type="number" id="newGoalTarget" class="goal-input" placeholder="10000">
+                </div>
+                <div class="goal-input-group">
+                    <label class="goal-label">Target Date</label>
+                    <input type="date" id="newGoalDate" class="goal-input" style="color-scheme: dark;">
+                </div>
+                <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
+                    <button class="confirm-btn cancel-btn clickable" id="cancelAddGoalBtn">Cancel</button>
+                    <button class="confirm-btn clickable" id="saveNewGoalBtn" style="background: var(--primary-accent); border: 1px solid var(--secondary-accent); color: white;">Save Goal</button>
+                </div>
             </div>
         </div>
     </div>
