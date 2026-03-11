@@ -1079,6 +1079,16 @@
     <main class="main-content">
         <header class="header">
             <h1 id="pageTitle">Overview</h1>
+
+            <select id="currencySelect"
+                style="margin-left:auto; margin-right:10px; padding:4px 8px; border-radius:6px; background:#111; color:white; border:1px solid rgba(255,255,255,0.1);">
+                <option value="$">USD ($)</option>
+                <option value="₱">PHP (₱)</option>
+                <option value="€">EUR (€)</option>
+                <option value="£">GBP (£)</option>
+                <option value="¥">JPY (¥)</option>
+            </select>
+
             <button class="reset-btn clickable" id="resetBtn">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                     stroke-linecap="round" stroke-linejoin="round">
@@ -1298,6 +1308,28 @@
         const incomeEl = document.getElementById('incomeValue');
         const expensesEl = document.getElementById('expensesValue');
         const savingsEl = document.getElementById('savingsValue');
+
+        // Currency Settings
+        let currencySymbol = localStorage.getItem("currencySymbol") || "$";
+
+        const currencySelect = document.getElementById("currencySelect");
+
+        if (currencySelect) {
+            currencySelect.value = currencySymbol;
+
+            currencySelect.addEventListener("change", () => {
+                currencySymbol = currencySelect.value;
+                localStorage.setItem("currencySymbol", currencySymbol);
+                location.reload();
+
+            });
+        }
+
+        const currencyDisplays = document.querySelectorAll('.currency');
+
+        currencyDisplays.forEach(el => {
+            el.textContent = currencySymbol;
+        });
 
         const commandInput = document.getElementById('commandInput');
         const resetBtn = document.getElementById('resetBtn');
