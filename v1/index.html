@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -282,7 +283,8 @@
             text-align: left;
         }
 
-        th, td {
+        th,
+        td {
             padding: 1.2rem 1.5rem;
             border-bottom: 1px solid var(--border-color);
         }
@@ -308,13 +310,31 @@
             border-bottom: none;
         }
 
-        .col-desc { font-weight: 500; }
-        .col-cat { color: var(--text-muted); font-size: 0.95rem; }
-        .col-time { color: var(--text-muted); font-size: 0.9rem; }
-        
-        .amount-income { color: #4ade80; }
-        .amount-expense { color: #f87171; }
-        .amount-savings { color: #60a5fa; }
+        .col-desc {
+            font-weight: 500;
+        }
+
+        .col-cat {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .col-time {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .amount-income {
+            color: #4ade80;
+        }
+
+        .amount-expense {
+            color: #f87171;
+        }
+
+        .amount-savings {
+            color: #60a5fa;
+        }
 
         .badge {
             display: inline-flex;
@@ -463,7 +483,7 @@
             background: rgba(255, 255, 255, 0.05);
             border-color: rgba(255, 255, 255, 0.1);
         }
-        
+
         .manual-option.active {
             background: rgba(52, 21, 57, 0.3);
             border-color: var(--secondary-accent);
@@ -534,7 +554,7 @@
             outline: none;
             transition: all 0.2s ease;
         }
-        
+
         .desc-input:focus {
             border-color: var(--secondary-accent);
         }
@@ -616,7 +636,8 @@
             animation: pulse-glow 3s infinite;
         }
 
-        .fab-ai:hover::after, .fab-ai.active::after {
+        .fab-ai:hover::after,
+        .fab-ai.active::after {
             opacity: 1;
         }
 
@@ -634,14 +655,14 @@
             transform: translateY(-20px);
             pointer-events: none;
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
             z-index: 1000;
             display: flex;
             align-items: center;
             gap: 0.8rem;
             border-left: 3px solid var(--secondary-accent);
         }
-        
+
         .toast.show {
             opacity: 1;
             transform: translateY(0);
@@ -649,24 +670,54 @@
 
         /* Animations */
         @keyframes pulse-glow {
-            0% { opacity: 0.6; box-shadow: 0 0 20px rgba(142, 69, 133, 0.3); }
-            50% { opacity: 1; box-shadow: 0 0 35px rgba(142, 69, 133, 0.6); }
-            100% { opacity: 0.6; box-shadow: 0 0 20px rgba(142, 69, 133, 0.3); }
+            0% {
+                opacity: 0.6;
+                box-shadow: 0 0 20px rgba(142, 69, 133, 0.3);
+            }
+
+            50% {
+                opacity: 1;
+                box-shadow: 0 0 35px rgba(142, 69, 133, 0.6);
+            }
+
+            100% {
+                opacity: 0.6;
+                box-shadow: 0 0 20px rgba(142, 69, 133, 0.3);
+            }
         }
 
         @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
         }
 
         @keyframes slideIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .new-row {
@@ -703,7 +754,7 @@
             align-items: center;
             margin-bottom: 1rem;
         }
-        
+
         .drawer-title {
             font-size: 1.2rem;
             font-weight: 600;
@@ -811,9 +862,15 @@
             max-height: 60vh;
             padding-right: 0.5rem;
         }
-        
-        .goal-list::-webkit-scrollbar { width: 4px; }
-        .goal-list::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
+
+        .goal-list::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .goal-list::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
 
         .goal-card {
             background: rgba(255, 255, 255, 0.03);
@@ -822,8 +879,10 @@
             border: 1px solid var(--border-color);
             transition: border-color 0.2s;
         }
-        
-        .goal-card:hover { border-color: var(--subtle-border); }
+
+        .goal-card:hover {
+            border-color: var(--subtle-border);
+        }
 
         .goal-card-header {
             display: flex;
@@ -861,7 +920,7 @@
             display: flex;
             flex-direction: column;
             gap: 1rem;
-            background: rgba(0,0,0,0.3);
+            background: rgba(0, 0, 0, 0.3);
             padding: 1.2rem;
             border-radius: 12px;
             border: 1px solid var(--border-color);
@@ -872,7 +931,10 @@
         /* Confirmation Modal */
         .confirm-modal-overlay {
             position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
             background: rgba(0, 0, 0, 0.7);
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
@@ -883,10 +945,12 @@
             opacity: 0;
             transition: opacity 0.3s ease;
         }
+
         .confirm-modal-overlay.active {
             display: flex;
             opacity: 1;
         }
+
         .confirm-modal-content {
             background: rgba(15, 15, 15, 0.95);
             border: 1px solid var(--border-color);
@@ -895,30 +959,35 @@
             width: 90%;
             max-width: 400px;
             text-align: center;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(255,255,255,0.05);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
             transform: translateY(20px);
             transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
+
         .confirm-modal-overlay.active .confirm-modal-content {
             transform: translateY(0);
         }
+
         .confirm-title {
             color: var(--text-main);
             margin-bottom: 0.8rem;
             font-size: 1.4rem;
             font-weight: 600;
         }
+
         .confirm-message {
             color: var(--text-muted);
             margin-bottom: 2rem;
             font-size: 0.95rem;
             line-height: 1.5;
         }
+
         .confirm-actions {
             display: flex;
             gap: 1rem;
             justify-content: center;
         }
+
         .confirm-btn {
             padding: 0.8rem 1.5rem;
             border-radius: 10px;
@@ -929,46 +998,58 @@
             flex: 1;
             font-size: 0.95rem;
         }
+
         .cancel-btn {
             background: rgba(255, 255, 255, 0.05);
             color: var(--text-main);
-            border: 1px solid rgba(255,255,255,0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
+
         .cancel-btn:hover {
             background: rgba(255, 255, 255, 0.1);
-            border-color: rgba(255,255,255,0.2);
+            border-color: rgba(255, 255, 255, 0.2);
         }
+
         .delete-btn {
             background: #ab3030;
             color: white;
             border: 1px solid #dc2626;
         }
+
         .delete-btn:hover {
             background: #dc2626;
             box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
         }
-        
+
         /* Generic utilities */
         .clickable {
             cursor: pointer;
         }
 
-        #btn-dashboard, #btn-transactions, #btn-goals, #closeDrawerBtn {
+        #btn-dashboard,
+        #btn-transactions,
+        #btn-goals,
+        #closeDrawerBtn {
             pointer-events: auto;
             cursor: pointer;
         }
 
-        .nav-item svg, .drawer-close svg, .fab-button svg, .reset-btn svg {
+        .nav-item svg,
+        .drawer-close svg,
+        .fab-button svg,
+        .reset-btn svg {
             pointer-events: none;
         }
     </style>
 </head>
+
 <body>
     <aside class="sidebar">
         <div class="logo clickable">F</div>
         <div class="nav-items">
             <div class="nav-item active clickable" id="btn-dashboard" title="Dashboard">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
                     <rect x="3" y="3" width="7" height="9" rx="1"></rect>
                     <rect x="14" y="3" width="7" height="5" rx="1"></rect>
                     <rect x="14" y="12" width="7" height="9" rx="1"></rect>
@@ -976,7 +1057,8 @@
                 </svg>
             </div>
             <div class="nav-item clickable" id="btn-transactions" title="Transactions">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
                     <line x1="8" y1="6" x2="21" y2="6"></line>
                     <line x1="8" y1="12" x2="21" y2="12"></line>
                     <line x1="8" y1="18" x2="21" y2="18"></line>
@@ -986,8 +1068,9 @@
                 </svg>
             </div>
             <div class="nav-item clickable" id="btn-goals" title="Goals">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
                 </svg>
             </div>
         </div>
@@ -997,7 +1080,8 @@
         <header class="header">
             <h1 id="pageTitle">Overview</h1>
             <button class="reset-btn clickable" id="resetBtn">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
                     <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
                     <path d="M3 3v5h5"></path>
                 </svg>
@@ -1008,71 +1092,75 @@
         <!-- Dashboard View -->
         <div id="viewDashboard" class="view-section active">
             <section class="cards-grid">
-            <div class="card">
-                <div class="card-header">
-                    <span class="card-title">Total Balance</span>
-                    <div class="card-icon" style="color: #a78bfa; background: rgba(167, 139, 250, 0.1);">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="2" y="6" width="20" height="12" rx="2"></rect>
-                            <circle cx="12" cy="12" r="2"></circle>
-                            <path d="M6 12h.01M18 12h.01"></path>
-                        </svg>
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">Total Balance</span>
+                        <div class="card-icon" style="color: #a78bfa; background: rgba(167, 139, 250, 0.1);">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="6" width="20" height="12" rx="2"></rect>
+                                <circle cx="12" cy="12" r="2"></circle>
+                                <path d="M6 12h.01M18 12h.01"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="card-value">
+                        <span class="currency">$</span>
+                        <span id="balanceValue">0</span>
                     </div>
                 </div>
-                <div class="card-value">
-                    <span class="currency">$</span>
-                    <span id="balanceValue">0</span>
-                </div>
-            </div>
 
-            <div class="card">
-                <div class="card-header">
-                    <span class="card-title">Total Income</span>
-                    <div class="card-icon" style="color: #4ade80; background: rgba(74, 222, 128, 0.1);">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
-                            <polyline points="17 6 23 6 23 12"></polyline>
-                        </svg>
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">Total Income</span>
+                        <div class="card-icon" style="color: #4ade80; background: rgba(74, 222, 128, 0.1);">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                                <polyline points="17 6 23 6 23 12"></polyline>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="card-value">
+                        <span class="currency">$</span>
+                        <span id="incomeValue">0</span>
                     </div>
                 </div>
-                <div class="card-value">
-                    <span class="currency">$</span>
-                    <span id="incomeValue">0</span>
-                </div>
-            </div>
 
-            <div class="card">
-                <div class="card-header">
-                    <span class="card-title">Total Expenses</span>
-                    <div class="card-icon" style="color: #f87171; background: rgba(248, 113, 113, 0.1);">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <polyline points="23 18 13.5 8.5 8.5 13.5 1 6"></polyline>
-                            <polyline points="17 18 23 18 23 12"></polyline>
-                        </svg>
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">Total Expenses</span>
+                        <div class="card-icon" style="color: #f87171; background: rgba(248, 113, 113, 0.1);">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="23 18 13.5 8.5 8.5 13.5 1 6"></polyline>
+                                <polyline points="17 18 23 18 23 12"></polyline>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="card-value">
+                        <span class="currency">$</span>
+                        <span id="expensesValue">0</span>
                     </div>
                 </div>
-                <div class="card-value">
-                    <span class="currency">$</span>
-                    <span id="expensesValue">0</span>
-                </div>
-            </div>
 
-            <div class="card">
-                <div class="card-header">
-                    <span class="card-title">Savings Goal</span>
-                    <div class="card-icon" style="color: #60a5fa; background: rgba(96, 165, 250, 0.1);">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/>
-                            <circle cx="12" cy="7" r="4"/>
-                        </svg>
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">Savings Goal</span>
+                        <div class="card-icon" style="color: #60a5fa; background: rgba(96, 165, 250, 0.1);">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+                                <circle cx="12" cy="7" r="4" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="card-value">
+                        <span class="currency">$</span>
+                        <span id="savingsValue">0</span>
                     </div>
                 </div>
-                <div class="card-value">
-                    <span class="currency">$</span>
-                    <span id="savingsValue">0</span>
-                </div>
-            </div>
-        </section>
+            </section>
 
             <section class="transactions-section">
                 <h2 class="section-title">Recent Transactions</h2>
@@ -1098,7 +1186,8 @@
         <div class="drawer-header">
             <span class="drawer-title">Manage Goals</span>
             <button class="drawer-close clickable" id="closeDrawerBtn">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
                     <line x1="18" y1="6" x2="6" y2="18"></line>
                     <line x1="6" y1="6" x2="18" y2="18"></line>
                 </svg>
@@ -1109,9 +1198,13 @@
             <!-- Goal cards injected by JS -->
         </div>
 
-        <button class="drawer-save-btn clickable" id="showAddGoalBtn" style="margin-top: auto; background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.1); color: var(--text-main);">+ Add New Goal</button>
+        <button class="drawer-save-btn clickable" id="showAddGoalBtn"
+            style="margin-top: auto; background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.1); color: var(--text-main);">+
+            Add New Goal</button>
 
-        <button class="drawer-save-btn clickable" id="showAddGoalBtn" style="margin-top: auto; background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.1); color: var(--text-main);">+ Add New Goal</button>
+        <button class="drawer-save-btn clickable" id="showAddGoalBtn"
+            style="margin-top: auto; background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.1); color: var(--text-main);">+
+            Add New Goal</button>
     </div>
 
     <div class="fab-container">
@@ -1120,19 +1213,31 @@
             <div class="glass-popup manual-menu" id="manualBubble">
                 <div class="manual-option" data-type="income" onclick="selectManualCategory('income')">
                     <div class="manual-icon" style="background: rgba(74, 222, 128, 0.1); color: #4ade80;">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                            <polyline points="17 6 23 6 23 12"></polyline>
+                        </svg>
                     </div>
                     Income
                 </div>
                 <div class="manual-option" data-type="expense" onclick="selectManualCategory('expense')">
                     <div class="manual-icon" style="background: rgba(248, 113, 113, 0.1); color: #f87171;">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"></polyline><polyline points="17 18 23 18 23 12"></polyline></svg>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="23 18 13.5 8.5 8.5 13.5 1 6"></polyline>
+                            <polyline points="17 18 23 18 23 12"></polyline>
+                        </svg>
                     </div>
                     Expense
                 </div>
                 <div class="manual-option" data-type="savings" onclick="selectManualCategory('savings')">
                     <div class="manual-icon" style="background: rgba(96, 165, 250, 0.1); color: #60a5fa;">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+                            <circle cx="12" cy="7" r="4" />
+                        </svg>
                     </div>
                     Savings
                 </div>
@@ -1146,9 +1251,10 @@
                     <button class="submit-btn" onclick="submitManualEntry()">Add Transaction</button>
                 </div>
             </div>
-            
+
             <div class="fab-button" id="fabManual" title="Manual Add">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round">
                     <line x1="12" y1="5" x2="12" y2="19"></line>
                     <line x1="5" y1="12" x2="19" y2="12"></line>
                 </svg>
@@ -1160,26 +1266,31 @@
             <div class="glass-popup ai-bubble" id="aiBubble">
                 <div class="ai-header">
                     <div class="ai-avatar">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48 2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48 2.83-2.83"></path>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path
+                                d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48 2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48 2.83-2.83">
+                            </path>
                         </svg>
                     </div>
                     <div class="ai-greeting">How can I help you?</div>
                 </div>
                 <div class="command-input-wrapper">
-                    <input type="text" id="commandInput" class="command-input" placeholder="e.g. 'spent 50 on coffee', 'income 5000'..." autocomplete="off">
+                    <input type="text" id="commandInput" class="command-input"
+                        placeholder="e.g. 'spent 50 on coffee', 'income 5000'..." autocomplete="off">
                 </div>
             </div>
-            
+
             <div class="fab-button fab-ai clickable" id="fabAI" title="Ask Assistant">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round">
                     <path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"></path>
                     <path d="m9 10 2-2 4 4-2 2-4-4"></path>
                 </svg>
             </div>
         </div>
     </div>
-    
+
     <div id="toast" class="toast">
         <span id="toastMessage">Action completed</span>
     </div>
@@ -1190,14 +1301,14 @@
         const incomeEl = document.getElementById('incomeValue');
         const expensesEl = document.getElementById('expensesValue');
         const savingsEl = document.getElementById('savingsValue');
-        
+
         const commandInput = document.getElementById('commandInput');
         const resetBtn = document.getElementById('resetBtn');
         const toast = document.getElementById('toast');
         const toastMessage = document.getElementById('toastMessage');
         const dashTransactionsContainer = document.getElementById('dashTransactionsContainer');
         const fullTransactionsContainer = document.getElementById('fullTransactionsContainer');
-        
+
         // Popup Elements
         const fabAI = document.getElementById('fabAI');
         const aiBubble = document.getElementById('aiBubble');
@@ -1247,7 +1358,7 @@
                     console.error('Error parsing state from localStorage', e);
                 }
             } else {
-                state.goals = [ { id: Date.now(), name: "Main Savings", target: 10000 } ];
+                state.goals = [{ id: Date.now(), name: "Main Savings", target: 10000 }];
             }
             updateCards(false);
             renderTransactions();
@@ -1267,7 +1378,7 @@
                 maximumFractionDigits: 2
             });
         }
-        
+
         // Count up animation
         function animateValue(obj, start, end, duration) {
             let startTimestamp = null;
@@ -1292,7 +1403,7 @@
             const currentIncome = parseFloat(incomeEl.innerText.replace(/,/g, '')) || 0;
             const currentExpenses = parseFloat(expensesEl.innerText.replace(/,/g, '')) || 0;
             const currentSavings = parseFloat(savingsEl.innerText.replace(/,/g, '')) || 0;
-            
+
             const targetBalance = state.income - state.expenses;
 
             if (animate) {
@@ -1396,13 +1507,13 @@
         function showToast(message, isError = false) {
             clearTimeout(toastTimeout);
             toastMessage.innerText = message;
-            
+
             if (isError) {
                 toast.style.borderLeftColor = '#f87171';
             } else {
                 toast.style.borderLeftColor = 'var(--secondary-accent)';
             }
-            
+
             toast.classList.add('show');
             toastTimeout = setTimeout(() => {
                 toast.classList.remove('show');
@@ -1429,7 +1540,7 @@
                 time: new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true }),
                 status: 'Completed'
             };
-            
+
             state.transactions.unshift(newTx);
             if (state.transactions.length > 20) state.transactions.pop();
 
@@ -1492,11 +1603,11 @@
         // Manual Entry Logic
         function selectManualCategory(type) {
             selectedManualCategory = type;
-            
+
             // UI Toggle
             document.querySelectorAll('.manual-option').forEach(el => el.classList.remove('active'));
             document.querySelector(`.manual-option[data-type="${type}"]`).classList.add('active');
-            
+
             manualForm.classList.add('show');
             manualAmount.focus();
         }
@@ -1520,7 +1631,7 @@
             else categoryLabel = 'Savings';
 
             applyTransaction(amount, selectedManualCategory, categoryLabel, capitalizeWords(desc));
-            
+
             // Reset manual form wrapper
             manualAmount.value = '';
             manualDesc.value = '';
@@ -1531,11 +1642,11 @@
         function closeAllBubbles() {
             aiBubble.classList.remove('open');
             fabAI.classList.remove('active');
-            
+
             manualBubble.classList.remove('open');
             fabManual.classList.remove('active');
             manualForm.classList.remove('show');
-            
+
             document.querySelectorAll('.manual-option').forEach(el => el.classList.remove('active'));
             selectedManualCategory = null;
             commandInput.blur();
@@ -1588,11 +1699,19 @@
             pendingConfirmAction = null;
         }
 
-        document.getElementById('confirmCancelBtn').addEventListener('click', hideConfirmModal);
-        document.getElementById('confirmDeleteBtn').addEventListener('click', () => {
-            if (pendingConfirmAction) pendingConfirmAction();
-            hideConfirmModal();
-        });
+        const cancelBtn = document.getElementById('confirmCancelBtn');
+        const deleteBtn = document.getElementById('confirmDeleteBtn');
+
+        if (cancelBtn) {
+            cancelBtn.addEventListener('click', hideConfirmModal);
+        }
+
+        if (deleteBtn) {
+            deleteBtn.addEventListener('click', () => {
+                if (pendingConfirmAction) pendingConfirmAction();
+                hideConfirmModal();
+            });
+        }
 
         // Transaction Delete Logic
         function confirmDeleteTransaction(id) {
@@ -1602,7 +1721,7 @@
                 if (tx.type === 'income') state.income -= tx.amount;
                 else if (tx.type === 'expense') state.expenses -= tx.amount;
                 else if (tx.type === 'savings') state.savings -= tx.amount;
-                
+
                 state.transactions = state.transactions.filter(t => t.id !== id);
                 saveState();
                 updateCards(true);
@@ -1618,14 +1737,14 @@
                 goalListContainer.innerHTML = `<div style="color: var(--text-muted); text-align: center; padding: 2rem 0;">No goals yet.<br>Click 'Add New Goal' to start saving!</div>`;
                 return;
             }
-            
+
             let html = '';
             const saved = state.savings || 0;
-            
+
             state.goals.forEach(goal => {
                 let percent = Math.min(Math.round((saved / goal.target) * 100), 100);
                 if (isNaN(percent)) percent = 0;
-                
+
                 html += `
                     <div class="goal-card">
                         <div class="goal-card-header">
@@ -1675,7 +1794,7 @@
             const manualBtn = e.target.closest('#fabManual');
             const isInsideAiBubble = e.target.closest('#aiBubble');
             const isInsideManualBubble = e.target.closest('#manualBubble');
-            
+
             if (!aiBtn && !isInsideAiBubble && !manualBtn && !isInsideManualBubble) {
                 closeAllBubbles();
             }
@@ -1697,7 +1816,7 @@
         manualAmount.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') submitManualEntry();
         });
-        
+
         manualDesc.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') submitManualEntry();
         });
@@ -1727,10 +1846,10 @@
             const viewDash = document.getElementById('viewDashboard');
             const viewTab = document.getElementById('viewTable');
             const pageTitleEl = document.getElementById('pageTitle');
-            
+
             const fabAIManual = document.getElementById('fabAI');
             const fabManualBtn = document.getElementById('fabManual');
-            
+
             const btnShowAddGoal = document.getElementById('showAddGoalBtn');
             const btnCancelAddGoal = document.getElementById('cancelAddGoalBtn');
             const btnSaveNewGoal = document.getElementById('saveNewGoalBtn');
@@ -1756,16 +1875,16 @@
             if (btnShowAddGoal && addGoalModal) {
                 btnShowAddGoal.onclick = () => {
                     addGoalModal.classList.add('active');
-                    if(inputGoalName) inputGoalName.focus();
+                    if (inputGoalName) inputGoalName.focus();
                 };
             }
 
             if (btnCancelAddGoal && addGoalModal) {
                 btnCancelAddGoal.onclick = () => {
                     addGoalModal.classList.remove('active');
-                    if(inputGoalName) inputGoalName.value = '';
-                    if(inputGoalTarget) inputGoalTarget.value = '';
-                    if(inputGoalDate) inputGoalDate.value = '';
+                    if (inputGoalName) inputGoalName.value = '';
+                    if (inputGoalTarget) inputGoalTarget.value = '';
+                    if (inputGoalDate) inputGoalDate.value = '';
                 };
             }
 
@@ -1774,7 +1893,7 @@
                     const name = inputGoalName ? inputGoalName.value.trim() : '';
                     const target = inputGoalTarget ? parseFloat(inputGoalTarget.value) : 0;
                     const targetDate = inputGoalDate ? inputGoalDate.value : '';
-                    
+
                     const finalName = name || 'New Goal';
                     const finalTarget = isNaN(target) || target <= 0 ? 1000 : target;
 
@@ -1782,11 +1901,11 @@
                     saveState();
                     updateGoalDrawerUI();
                     showToast("Goal created!");
-                    
+
                     addGoalModal.classList.remove('active');
-                    if(inputGoalName) inputGoalName.value = '';
-                    if(inputGoalTarget) inputGoalTarget.value = '';
-                    if(inputGoalDate) inputGoalDate.value = '';
+                    if (inputGoalName) inputGoalName.value = '';
+                    if (inputGoalTarget) inputGoalTarget.value = '';
+                    if (inputGoalDate) inputGoalDate.value = '';
                 };
             }
 
@@ -1810,7 +1929,7 @@
                     viewTab.style.display = 'block';
                     document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
                     btnTransactions.classList.add('active');
-                    if(pageTitleEl) pageTitleEl.innerText = "All Transactions";
+                    if (pageTitleEl) pageTitleEl.innerText = "All Transactions";
                 };
             }
 
@@ -1820,7 +1939,7 @@
                     viewTab.style.display = 'block';
                     document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
                     btnDashboard.classList.add('active');
-                    if(pageTitleEl) pageTitleEl.innerText = "Overview";
+                    if (pageTitleEl) pageTitleEl.innerText = "Overview";
                 };
             }
         }
@@ -1841,14 +1960,15 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Add Goal Modal -->
     <div class="confirm-modal-overlay" id="addGoalModal">
         <div class="confirm-modal-content" style="text-align: left;">
             <div class="drawer-header" style="margin-bottom: 2rem; justify-content: center;">
                 <span class="drawer-title" style="font-size: 1.4rem;">Add New Goal</span>
             </div>
-            <div class="add-goal-form" style="display: flex; background: transparent; padding: 0; border: none; margin-top: 0; box-shadow: none; animation: none;">
+            <div class="add-goal-form"
+                style="display: flex; background: transparent; padding: 0; border: none; margin-top: 0; box-shadow: none; animation: none;">
                 <div class="goal-input-group">
                     <label class="goal-label">Goal Name</label>
                     <input type="text" id="newGoalName" class="goal-input" placeholder="e.g. New Car">
@@ -1863,10 +1983,13 @@
                 </div>
                 <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
                     <button class="confirm-btn cancel-btn clickable" id="cancelAddGoalBtn">Cancel</button>
-                    <button class="confirm-btn clickable" id="saveNewGoalBtn" style="background: var(--primary-accent); border: 1px solid var(--secondary-accent); color: white;">Save Goal</button>
+                    <button class="confirm-btn clickable" id="saveNewGoalBtn"
+                        style="background: var(--primary-accent); border: 1px solid var(--secondary-accent); color: white;">Save
+                        Goal</button>
                 </div>
             </div>
         </div>
     </div>
 </body>
+
 </html>
