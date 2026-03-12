@@ -1505,7 +1505,7 @@
                             </div>
                         </td>
                         <td class="col-cat">${tx.category}</td>
-                        <td class="${amountClass}" style="font-weight: 500;">${sign}$${formatNumber(tx.amount)}</td>
+                        <td class="${amountClass}" style="font-weight: 500;">${sign}${currencySymbol}${formatNumber(tx.amount)}</td>
                         <td class="col-time">${tx.time}</td>
                         <td>
                             <span class="badge">${tx.status}</span>
@@ -1795,7 +1795,7 @@
                             </div>
                             <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem; display: flex; justify-content: space-between;">
                                 <span>${goal.date ? 'Target: ' + goal.date : ''}</span>
-                                <span>$${formatNumber(saved)} / $${formatNumber(goal.target)}</span>
+                                <span>${currencySymbol}${formatNumber(saved)} / ${currencySymbol}${formatNumber(goal.target)}</span>
                             </div>
                         </div>
                     </div>
