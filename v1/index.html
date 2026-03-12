@@ -1556,6 +1556,8 @@
 
         // Shared Logic to Apply a Transaction
         function applyTransaction(amount, type, categoryLabel, description) {
+            console.log('applyTransaction called:', { amount, type, categoryLabel, description });
+
             if (type === 'income') state.income += amount;
             else if (type === 'expense') state.expenses += amount;
             else if (type === 'savings') state.savings += amount;
