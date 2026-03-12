@@ -1181,7 +1181,7 @@
         </div>
 
         <!-- Full Table View -->
-        <div id="viewTable" class="view-section" style="display: none;">
+        <div id="viewTable" class="view-section">
             <section class="transactions-section" style="flex:1; display:flex; flex-direction:column;">
                 <div class="transactions-container" id="fullTransactionsContainer" style="flex:1;">
                     <!-- Content will be injected by JS -->
@@ -1469,7 +1469,7 @@
 
             if (state.transactions.length === 0) {
                 dashTransactionsContainer.innerHTML = emptyHTML;
-                fullTransactionsContainer.innerHTML = "";
+                fullTransactionsContainer.innerHTML = emptyHTML;
                 return;
             }
 
@@ -1985,25 +1985,32 @@
                 };
             }
 
-            fullTransactionsContainer.innerHTML = `
-<div class="empty-state">
+            if (btnTransactions && viewDash && viewTab) {
+                btnTransactions.onclick = () => {
+                    viewDash.style.display = 'none';
+                    viewTab.style.display = 'block';
+                    document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+                    btnTransactions.classList.add('active');
+                    if (pageTitleEl) pageTitleEl.innerText = "All Transactions";
+                };
+            }
 
             if (btnDashboard && viewDash && viewTab) {
                 btnDashboard.onclick = () => {
                     viewDash.style.display = 'block';
-                    viewTab.style.display = 'none';
-                    fullTransactionsContainer.innerHTML = "";
+                    viewTab.style.display = 'block';
                     document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
                     btnDashboard.classList.add('active');
                     if (pageTitleEl) pageTitleEl.innerText = "Overview";
                 };
             }
+        }
 
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', initializeUIButtons);
-            } else {
-                initializeUIButtons();
-            }
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializeUIButtons);
+        } else {
+            initializeUIButtons();
+        }
     </script>
     <div class="confirm-modal-overlay" id="confirmModal">
         <div class="confirm-modal-content">
