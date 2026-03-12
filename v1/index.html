@@ -1388,16 +1388,14 @@
                     state.transactions.forEach(t => {
                         if (!t.id) t.id = Date.now() + Math.random();
                     });
-                    if (!state.goals || state.goals.length === 0) {
-                        state.goals = [
-                            { id: Date.now(), name: state.goalName || "Main Savings", target: state.goalTarget || 10000 }
-                        ];
+                    if (!state.goals) {
+                        state.goals = [];
                     }
                 } catch (e) {
                     console.error('Error parsing state from localStorage', e);
                 }
             } else {
-                state.goals = [{ id: Date.now(), name: "Main Savings", target: 10000 }];
+                state.goals = [];
             }
             updateCards(false);
             renderTransactions();
