@@ -1898,7 +1898,10 @@
                 });
 
             }
-
+            const goalTargetLabel = document.getElementById('goalTargetLabel');
+            if (goalTargetLabel) {
+                goalTargetLabel.textContent = `Target Amount (${currencySymbol})`;
+            }
             const btnDashboard = document.getElementById('btn-dashboard');
             const btnTransactions = document.getElementById('btn-transactions');
             const btnGoals = document.getElementById('btn-goals');
