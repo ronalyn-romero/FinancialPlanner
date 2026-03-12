@@ -1867,6 +1867,26 @@
 
         // Hard Reset Listeners explicitly as requested
         function initializeUIButtons() {
+
+            const confirmCancelBtn = document.getElementById('confirmCancelBtn');
+            const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
+
+            if (confirmCancelBtn) {
+                confirmCancelBtn.addEventListener('click', () => {
+                    hideConfirmModal();
+                });
+            }
+
+            if (confirmDeleteBtn) {
+                confirmDeleteBtn.addEventListener('click', () => {
+                    if (pendingConfirmAction) {
+                        pendingConfirmAction();
+                    }
+                    hideConfirmModal();
+                });
+
+            }
+
             const btnDashboard = document.getElementById('btn-dashboard');
             const btnTransactions = document.getElementById('btn-transactions');
             const btnGoals = document.getElementById('btn-goals');
