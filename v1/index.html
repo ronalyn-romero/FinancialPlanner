@@ -750,7 +750,7 @@
 
         .drawer-header {
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
             margin-bottom: 1rem;
         }
@@ -1195,13 +1195,6 @@
     <div class="goal-drawer" id="goal-drawer">
         <div class="drawer-header">
             <span class="drawer-title">Manage Goals</span>
-            <button class="drawer-close clickable" id="closeDrawerBtn">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                    stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="18" y1="6" x2="6" y2="18"></line>
-                    <line x1="6" y1="6" x2="18" y2="18"></line>
-                </svg>
-            </button>
         </div>
 
         <div class="goal-list" id="goalListContainer">
@@ -1973,9 +1966,16 @@
 
             if (btnGoals && sideGoalDrawer) {
                 btnGoals.onclick = () => {
-                    sideGoalDrawer.style.right = '0';
-                    document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
-                    btnGoals.classList.add('active');
+
+                    if (sideGoalDrawer.style.right === '0px' || sideGoalDrawer.style.right === '0') {
+                        sideGoalDrawer.style.right = '-400px';
+                        btnGoals.classList.remove('active');
+                    } else {
+                        sideGoalDrawer.style.right = '0';
+                        document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+                        btnGoals.classList.add('active');
+                    }
+
                 };
             }
 
