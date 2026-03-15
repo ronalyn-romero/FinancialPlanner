@@ -1080,23 +1080,68 @@
         <header class="header">
             <h1 id="pageTitle">Overview</h1>
 
-            <select id="currencySelect"
-                style="margin-left:auto; margin-right:10px; padding:4px 8px; border-radius:6px; background:#111; color:white; border:1px solid rgba(255,255,255,0.1);">
-                <option value="$">USD ($)</option>
-                <option value="₱">PHP (₱)</option>
-                <option value="€">EUR (€)</option>
-                <option value="£">GBP (£)</option>
-                <option value="¥">JPY (¥)</option>
-            </select>
+            <div style="margin-left:auto; display: flex; align-items: center; gap: 10px;" id="topControls">
+                
+                <div style="position: relative; display: flex; align-items: center;" id="optionsMenuContainer">
+                    <button class="reset-btn clickable" id="btnMoreOptions" style="padding: 0.6rem; display: flex; align-items: center; justify-content: center;" title="More Options">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="1.5"></circle>
+                            <circle cx="12" cy="5" r="1.5"></circle>
+                            <circle cx="12" cy="19" r="1.5"></circle>
+                        </svg>
+                    </button>
+                    
+                    <div class="glass-popup manual-menu" id="moreOptionsMenu" style="position: absolute; top: calc(100% + 8px); bottom: auto; right: 0; z-index: 1000; width: max-content; padding: 0.5rem 0; border-radius: 12px; overflow: hidden; background: var(--card-bg); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6); transform-origin: top right;">
+                        <div class="manual-option clickable" id="btnTermsOfUse" style="border-radius: 0; border: none; padding: 0.8rem 1.5rem;">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="min-width: 16px;">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                            </svg>
+                            Terms of Use
+                        </div>
+                        <div class="manual-option clickable" id="btnPrivacyPolicy" style="border-radius: 0; border: none; padding: 0.8rem 1.5rem;">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="min-width: 16px;">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            </svg>
+                            Privacy Policy
+                        </div>
+                        <div class="manual-option clickable" id="btnExportBackup" style="border-radius: 0; border: none; padding: 0.8rem 1.5rem;">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="min-width: 16px;">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="7 10 12 15 17 10"></polyline>
+                                <line x1="12" y1="15" x2="12" y2="3"></line>
+                            </svg>
+                            Export Backup
+                        </div>
+                        <input type="file" id="importBackupFile" accept=".json" style="display: none;">
+                        <div class="manual-option clickable" id="btnImportBackup" style="border-radius: 0; border: none; padding: 0.8rem 1.5rem;">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="min-width: 16px;">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="17 8 12 3 7 8"></polyline>
+                                <line x1="12" y1="3" x2="12" y2="15"></line>
+                            </svg>
+                            Import Backup
+                        </div>
+                    </div>
+                </div>
 
-            <button class="reset-btn clickable" id="resetBtn">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                    stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
-                    <path d="M3 3v5h5"></path>
-                </svg>
-                Reset Data
-            </button>
+                <select id="currencySelect" class="reset-btn clickable" style="appearance: auto; outline: none;">
+                    <option value="$" style="background: var(--card-bg); color: var(--text-main);">USD ($)</option>
+                    <option value="₱" style="background: var(--card-bg); color: var(--text-main);">PHP (₱)</option>
+                    <option value="€" style="background: var(--card-bg); color: var(--text-main);">EUR (€)</option>
+                    <option value="£" style="background: var(--card-bg); color: var(--text-main);">GBP (£)</option>
+                    <option value="¥" style="background: var(--card-bg); color: var(--text-main);">JPY (¥)</option>
+                </select>
+
+                <button class="reset-btn clickable" id="resetBtn">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+                        <path d="M3 3v5h5"></path>
+                    </svg>
+                    Reset Data
+                </button>
+            </div>
         </header>
 
         <!-- Dashboard View -->
@@ -1672,17 +1717,22 @@
 
         // Popups Toggle Logic
         function closeAllBubbles() {
-            aiBubble.classList.remove('open');
-            fabAI.classList.remove('active');
+            if (aiBubble) aiBubble.classList.remove('open');
+            if (fabAI) fabAI.classList.remove('active');
 
-            manualBubble.classList.remove('open');
-            fabManual.classList.remove('active');
-            manualForm.classList.remove('show');
+            if (manualBubble) manualBubble.classList.remove('open');
+            if (fabManual) fabManual.classList.remove('active');
+            if (manualForm) manualForm.classList.remove('show');
+
+            const moreOptionsMenu = document.getElementById('moreOptionsMenu');
+            const btnMoreOptions = document.getElementById('btnMoreOptions');
+            if (moreOptionsMenu) moreOptionsMenu.classList.remove('open');
+            if (btnMoreOptions) btnMoreOptions.classList.remove('active');
 
             document.querySelectorAll('.manual-option').forEach(el => el.classList.remove('active'));
             selectedManualCategory = null;
-            commandInput.blur();
-            manualAmount.blur();
+            if (commandInput) commandInput.blur();
+            if (manualAmount) manualAmount.blur();
         }
 
         function toggleAiBubble() {
@@ -1826,8 +1876,10 @@
             const manualBtn = e.target.closest('#fabManual');
             const isInsideAiBubble = e.target.closest('#aiBubble');
             const isInsideManualBubble = e.target.closest('#manualBubble');
+            const moreOptionsBtn = e.target.closest('#btnMoreOptions');
+            const isInsideMoreOptions = e.target.closest('#moreOptionsMenu');
 
-            if (!aiBtn && !isInsideAiBubble && !manualBtn && !isInsideManualBubble) {
+            if (!aiBtn && !isInsideAiBubble && !manualBtn && !isInsideManualBubble && !moreOptionsBtn && !isInsideMoreOptions) {
                 closeAllBubbles();
             }
         }
@@ -1912,6 +1964,109 @@
             const inputGoalName = document.getElementById('newGoalName');
             const inputGoalTarget = document.getElementById('newGoalTarget');
             const inputGoalDate = document.getElementById('newGoalDate');
+
+            const btnPrivacyPolicy = document.getElementById('btnPrivacyPolicy');
+            const privacyPolicyModal = document.getElementById('privacyPolicyModal');
+            const closePrivacyPolicyBtn = document.getElementById('closePrivacyPolicyBtn');
+
+            const btnTermsOfUse = document.getElementById('btnTermsOfUse');
+            const termsOfUseModal = document.getElementById('termsOfUseModal');
+            const closeTermsOfUseBtn = document.getElementById('closeTermsOfUseBtn');
+
+            const btnExportBackup = document.getElementById('btnExportBackup');
+            const btnImportBackup = document.getElementById('btnImportBackup');
+            const importBackupFile = document.getElementById('importBackupFile');
+
+            const btnMoreOptions = document.getElementById('btnMoreOptions');
+            const moreOptionsMenu = document.getElementById('moreOptionsMenu');
+
+            if (btnMoreOptions && moreOptionsMenu) {
+                btnMoreOptions.onclick = (e) => {
+                    e.stopPropagation();
+                    const isOpen = moreOptionsMenu.classList.contains('open');
+                    closeAllBubbles();
+                    if (!isOpen) {
+                        moreOptionsMenu.classList.add('open');
+                        btnMoreOptions.classList.add('active');
+                    }
+                };
+            }
+
+            if (btnPrivacyPolicy && privacyPolicyModal) {
+                btnPrivacyPolicy.onclick = () => {
+                    closeAllBubbles();
+                    privacyPolicyModal.classList.add('active');
+                };
+            }
+
+            if (closePrivacyPolicyBtn && privacyPolicyModal) {
+                closePrivacyPolicyBtn.onclick = () => {
+                    privacyPolicyModal.classList.remove('active');
+                };
+            }
+
+            if (btnTermsOfUse && termsOfUseModal) {
+                btnTermsOfUse.onclick = () => {
+                    closeAllBubbles();
+                    termsOfUseModal.classList.add('active');
+                };
+            }
+
+            if (closeTermsOfUseBtn && termsOfUseModal) {
+                closeTermsOfUseBtn.onclick = () => {
+                    termsOfUseModal.classList.remove('active');
+                };
+            }
+
+            if (btnExportBackup) {
+                btnExportBackup.onclick = () => {
+                    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(state, null, 2));
+                    const downloadAnchorNode = document.createElement('a');
+                    downloadAnchorNode.setAttribute("href", dataStr);
+                    downloadAnchorNode.setAttribute("download", "financial-planner-backup.json");
+                    document.body.appendChild(downloadAnchorNode); // required for firefox
+                    downloadAnchorNode.click();
+                    downloadAnchorNode.remove();
+                    showToast("Backup exported successfully!");
+                };
+            }
+
+            if (btnImportBackup && importBackupFile) {
+                btnImportBackup.onclick = () => {
+                    importBackupFile.click();
+                };
+
+                importBackupFile.onchange = (e) => {
+                    const file = e.target.files[0];
+                    if (!file) return;
+
+                    const reader = new FileReader();
+                    reader.onload = (event) => {
+                        try {
+                            const importedState = JSON.parse(event.target.result);
+                            
+                            // Validate format roughly matches expected app state schema
+                            if (importedState && typeof importedState === 'object' && Array.isArray(importedState.transactions)) {
+                                state = { ...state, ...importedState };
+                                if (!state.goals) state.goals = [];
+                                
+                                saveState();
+                                updateCards(false);
+                                renderTransactions();
+                                updateGoalDrawerUI();
+                                alert("Backup successfully restored!");
+                            } else {
+                                alert("Error: Invalid backup file format.");
+                            }
+                        } catch (err) {
+                            alert("Error parsing backup file.");
+                        }
+                        // Reset file input
+                        importBackupFile.value = '';
+                    };
+                    reader.readAsText(file);
+                };
+            }
 
             if (fabAIManual) {
                 fabAIManual.onclick = (e) => {
@@ -2049,6 +2204,50 @@
                         style="background: var(--primary-accent); border: 1px solid var(--secondary-accent); color: white;">Save
                         Goal</button>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Privacy Policy Modal -->
+    <div class="confirm-modal-overlay" id="privacyPolicyModal">
+        <div class="confirm-modal-content" style="text-align: left; max-width: 500px;">
+            <div class="drawer-header" style="margin-bottom: 2rem; justify-content: center;">
+                <span class="drawer-title" style="font-size: 1.4rem;">Privacy Policy</span>
+            </div>
+            <div style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 2rem;">
+                <p style="margin-bottom: 1rem;">This Financial Planner application stores budgeting data locally in the user's browser using localStorage.</p>
+                <p style="margin-bottom: 0.5rem;">This may include:</p>
+                <ul style="margin-bottom: 1rem; padding-left: 1.5rem;">
+                    <li>transactions</li>
+                    <li>savings goals</li>
+                    <li>selected currency</li>
+                    <li>application preferences</li>
+                </ul>
+                <p style="margin-bottom: 1rem;">This app is hosted on Vercel. Vercel may process limited technical request data required to deliver the website.</p>
+                <p style="margin-bottom: 1rem;">This application does not intentionally send financial data to any external backend database.</p>
+                <p>Users are responsible for exporting backups if they want to preserve their data across browsers or devices.</p>
+            </div>
+            <div style="display: flex; justify-content: center;">
+                <button class="confirm-btn cancel-btn clickable" id="closePrivacyPolicyBtn">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Terms of Use Modal -->
+    <div class="confirm-modal-overlay" id="termsOfUseModal">
+        <div class="confirm-modal-content" style="text-align: left; max-width: 500px;">
+            <div class="drawer-header" style="margin-bottom: 2rem; justify-content: center;">
+                <span class="drawer-title" style="font-size: 1.4rem;">Terms of Use</span>
+            </div>
+            <div style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 2rem;">
+                <p style="margin-bottom: 1rem;">This Financial Planner application is provided for personal budgeting and financial planning purposes only.</p>
+                <p style="margin-bottom: 1rem;">It does not provide financial, legal, tax, or investment advice.</p>
+                <p style="margin-bottom: 1rem;">All financial data is stored locally in the user's browser using localStorage and may be lost if browser storage is cleared.</p>
+                <p style="margin-bottom: 1rem;">The developer is not responsible for data loss, inaccurate calculations, or decisions made using this application.</p>
+                <p>Use of this application is at your own risk.</p>
+            </div>
+            <div style="display: flex; justify-content: center;">
+                <button class="confirm-btn cancel-btn clickable" id="closeTermsOfUseBtn">Close</button>
             </div>
         </div>
     </div>
