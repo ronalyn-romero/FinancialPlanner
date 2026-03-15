@@ -1998,7 +1998,7 @@
             if (btnDashboard && viewDash && viewTab) {
                 btnDashboard.onclick = () => {
                     viewDash.style.display = 'block';
-                    viewTab.style.display = 'block';
+                    viewTab.style.display = 'none';
                     document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
                     btnDashboard.classList.add('active');
                     if (pageTitleEl) pageTitleEl.innerText = "Overview";
