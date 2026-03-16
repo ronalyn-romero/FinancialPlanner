@@ -1092,19 +1092,6 @@
                     </button>
                     
                     <div class="glass-popup manual-menu" id="moreOptionsMenu" style="position: absolute; top: calc(100% + 8px); bottom: auto; right: 0; z-index: 1000; width: max-content; padding: 0.5rem 0; border-radius: 12px; overflow: hidden; background: var(--card-bg); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6); transform-origin: top right;">
-                        <div class="manual-option clickable" id="btnTermsOfUse" style="border-radius: 0; border: none; padding: 0.8rem 1.5rem;">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="min-width: 16px;">
-                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                                <polyline points="14 2 14 8 20 8"/>
-                            </svg>
-                            Terms of Use
-                        </div>
-                        <div class="manual-option clickable" id="btnPrivacyPolicy" style="border-radius: 0; border: none; padding: 0.8rem 1.5rem;">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="min-width: 16px;">
-                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                            </svg>
-                            Privacy Policy
-                        </div>
                         <div class="manual-option clickable" id="btnExportBackup" style="border-radius: 0; border: none; padding: 0.8rem 1.5rem;">
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="min-width: 16px;">
                                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
@@ -2205,8 +2192,18 @@
                         Goal</button>
                 </div>
             </div>
+            </div>
         </div>
     </div>
+
+    <!-- App Footer -->
+    <footer style="margin-top: 4rem; padding: 2rem 0; text-align: center; color: var(--text-muted); font-size: 0.9rem; border-top: 1px solid var(--border-color);">
+        <span>&copy; 2026 Financial Planner</span>
+        <span style="margin: 0 0.5rem;">&bull;</span>
+        <span class="clickable" id="btnPrivacyPolicy" style="cursor: pointer; transition: color 0.2s;">Privacy Policy</span>
+        <span style="margin: 0 0.5rem;">&bull;</span>
+        <span class="clickable" id="btnTermsOfUse" style="cursor: pointer; transition: color 0.2s;">Terms of Use</span>
+    </footer>
 
     <!-- Privacy Policy Modal -->
     <div class="confirm-modal-overlay" id="privacyPolicyModal">
